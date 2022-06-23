@@ -2,10 +2,10 @@
 # Also, I am not at all proud of this makefile, feel free to make better
 
 all:
-	g++ -o smallvcm ./src/smallvcm.cpp -O3 -std=c++0x -fopenmp
+	g++ -o smallvcm ./src/smallvcm.cpp -O3 -std=c++14 -fopenmp
 
-old_rng:
-	g++ -o smallvcm ./src/smallvcm.cp -O3 -fopenmp -DLEGACY_RNG
+oldrng:
+	g++ -o smallvcm ./src/smallvcm.cpp -O3 -std=c++14 -fopenmp -DLEGACY_RNG
 
 clean:
 	rm smallvcm
