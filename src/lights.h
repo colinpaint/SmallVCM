@@ -1,29 +1,4 @@
-/*
- * Copyright (C) 2012, Tomas Davidovic (http://www.davidovic.cz)
- *
- * Permission is hereby granted, free of charge, to any person obtaining
- * a copy of this software and associated documentation files (the "Software"),
- * to deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
- * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
- * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
- * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
- * (The above is MIT License: http://en.wikipedia.org/wiki/MIT_License)
- */
-
-#ifndef __LIGHTS_HXX__
-#define __LIGHTS_HXX__
+#pragma once
 
 #include <vector>
 #include <cmath>
@@ -305,7 +280,7 @@ public:
 
     // Whether the light has a finite extent (area, point) or not (directional, env. map)
     virtual bool IsFinite() const { return false; }
-    
+
     // Whether the light has delta function (point, directional) or not (area)
     virtual bool IsDelta() const  { return true; }
 
@@ -383,10 +358,10 @@ public:
     {
         return Vec3f(0);
     }
-    
+
     // Whether the light has a finite extent (area, point) or not (directional, env. map)
     virtual bool IsFinite() const { return true; }
-    
+
     // Whether the light has delta function (point, directional) or not (area)
     virtual bool IsDelta() const  { return true; }
 
@@ -457,7 +432,7 @@ public:
 
         Frame frame;
         frame.SetFromZ(oDirection);
-        
+
         oPosition = aSceneSphere.mSceneCenter + aSceneSphere.mSceneRadius * (
             -oDirection + frame.Binormal() * xy.x + frame.Tangent() * xy.y);
 
@@ -469,7 +444,7 @@ public:
         // For background we lie about Pdf being in area measure
         if(oDirectPdfA)
             *oDirectPdfA = directPdf;
-        
+
         // Not used for infinite or delta lights
         if(oCosThetaLight)
             *oCosThetaLight = 1.f;
@@ -497,13 +472,13 @@ public:
 
         if(oEmissionPdfW)
             *oEmissionPdfW = directPdf * positionPdf;
-        
+
         return radiance;
     }
 
     // Whether the light has a finite extent (area, point) or not (directional, env. map)
     virtual bool IsFinite() const { return false; }
-    
+
     // Whether the light has delta function (point, directional) or not (area)
     virtual bool IsDelta() const  { return false; }
 
@@ -512,4 +487,3 @@ public:
     Vec3f mBackgroundColor;
     float mScale;
 };
-#endif //__LIGHTS_HXX__

@@ -1,29 +1,4 @@
-/*
- * Copyright (C) 2012, Tomas Davidovic (http://www.davidovic.cz)
- *
- * Permission is hereby granted, free of charge, to any person obtaining
- * a copy of this software and associated documentation files (the "Software"),
- * to deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
- * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
- * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
- * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
- * (The above is MIT License: http://en.wikipedia.org/wiki/MIT_License)
- */
-
-#ifndef __BSDF_HXX__
-#define __BSDF_HXX__
+#pragma once
 
 #include <vector>
 #include <cmath>
@@ -219,19 +194,19 @@ public:
         if(sampledEvent == kDiffuse)
         {
             result += SampleDiffuse(mat, aRndTriplet.GetXY(), localDirGen, oPdfW);
-            
+
             if(result.IsZero())
                 return Vec3f(0);
-            
+
             result += EvaluatePhong(mat, localDirGen, &oPdfW);
         }
         else if(sampledEvent == kPhong)
         {
             result += SamplePhong(mat, aRndTriplet.GetXY(), localDirGen, oPdfW);
-            
+
             if(result.IsZero())
                 return Vec3f(0);
-            
+
             result += EvaluateDiffuse(mat, localDirGen, &oPdfW);
         }
         else if(sampledEvent == kReflect)
@@ -574,5 +549,3 @@ private:
     float mContinuationProb; //!< Russian roulette probability
     float mReflectCoeff;     //!< Fresnel reflection coefficient (for glass)
 };
-
-#endif //__BSDF_HXX__

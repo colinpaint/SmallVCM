@@ -1,29 +1,4 @@
-/*
- * Copyright (C) 2012, Tomas Davidovic (http://www.davidovic.cz)
- *
- * Permission is hereby granted, free of charge, to any person obtaining
- * a copy of this software and associated documentation files (the "Software"),
- * to deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
- * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
- * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
- * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
- * (The above is MIT License: http://en.wikipedia.org/wiki/MIT_License)
- */
-
-#ifndef __VERTEXCM_HXX__
-#define __VERTEXCM_HXX__
+#pragma once
 
 #include <vector>
 #include <cmath>
@@ -55,7 +30,7 @@
 //
 //   [tech. rep. (##)]
 //
-// where ## is the equation number. 
+// where ## is the equation number.
 //
 
 class VertexCM : public AbstractRenderer
@@ -115,7 +90,7 @@ class VertexCM : public AbstractRenderer
             const Vec3f        &aCameraPosition,
             const CameraBSDF   &aCameraBsdf,
             const SubPathState &aCameraState
-        ) : 
+        ) :
             mVertexCM(aVertexCM),
             mCameraPosition(aCameraPosition),
             mCameraBsdf(aCameraBsdf),
@@ -468,13 +443,13 @@ public:
                 if(isect.lightID >= 0)
                 {
                     const AbstractLight *light = mScene.GetLightPtr(isect.lightID);
-                
+
                     if(cameraState.mPathLength >= mMinPathLength)
                     {
                         color += cameraState.mThroughput *
                             GetLightRadiance(light, cameraState, hitPoint, ray.dir);
                     }
-                    
+
                     break;
                 }
 
@@ -653,7 +628,7 @@ private:
 
         // Full path MIS weight [tech. rep. (37)].
         const float misWeight = 1.f / (1.f + wCamera);
-        
+
         return misWeight * radiance;
     }
 
@@ -693,7 +668,7 @@ private:
             return Vec3f(0);
 
         const float continuationProbability = aBsdf.ContinuationProb();
-        
+
         // If the light is delta light, we can never hit it
         // by BSDF sampling, so the probability of this path is 0
         bsdfDirPdfW *= light->IsDelta() ? 0.f : continuationProbability;
@@ -1001,7 +976,7 @@ private:
 
         aoState.mOrigin  = aHitPoint;
         aoState.mThroughput *= bsdfFactor * (cosThetaOut / bsdfDirPdfW);
-        
+
         return true;
     }
 
@@ -1029,5 +1004,3 @@ private:
 
     Rng              mRng;
 };
-
-#endif //__VERTEXCM_HXX__

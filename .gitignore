@@ -11,3 +11,8 @@ SmallVCM.vcxproj.user
 build
 ipch
 x64
+.vs
+
+*.~*
+*.*~
+*.*;*
